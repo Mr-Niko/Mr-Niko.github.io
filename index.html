@@ -1,84 +1,975 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      body {
-        background-color: lightblue;
-      }
+<head>
+	<meta charset="utf-8">
+	<!--      ***NOTES***   -->
+	<!-- style: ul\li\li a\ 	=> CSS Navigation Bar -->
+	<!-- style: h3 				=> header h3  -->
+	<!-- style:.collapsible\.active, .collapsible\.content => toggles -->	
 
-      h1 {
-        color: green;
-        text-align: center;
-      }
-      h2 {
-        color: blue;
-        text-align: center;
-      }
-      p {
-        font-family: verdana;
-        font-size: 20px;
-      }
-      p2 {
-        font-family: verdana;
-        font-size: 14px;
-      }
-    </style>
-  </head>
-  <body>
-    <ul class="navList">
-      <li><a onclick="fnShowChapter(1)">I. ToDo</a>
-      <div>
-        <a onclick="fnShowChapter(1, 'ch-1.1')">a) stop torrents</a>
-        <a onclick="fnShowChapter(1, 'ch-1.2')">b) загрузи торенты</a>
-        <a onclick="fnShowChapter(1, 'ch-1.3')">c) удалить после раздачи 1:1 и больше</a>
-        <a onclick="fnShowChapter(1, 'ch-1.4')">d) отредактируй</a>
-      </div>
-      </li>
-    
-      <li><a onclick="fnShowChapter(2)">II. Notes</a>
-        <div>
-          <a onclick="fnShowChapter(2, 'ch-2.1')">Наш ТВ UE48JS9000</a>
-        </div>
-      </li>
-    
-      <li><a onclick="fnShowChapter(3)">III. Фильмы и Передачи</a>
-        <div>
-          <a onclick="fnShowChapter(3, 'ch-3.1')">Готово к просмотру</a>
-          <a onclick="fnShowChapter(3, 'ch-3.2')">В ПЛАНАХ (загрузить)</a>
-        <a onclick="fnShowChapter(3, 'ch-3.3')">Посмотрели</a>
-        <a onclick="fnShowChapter(3, 'ch-3.4')">Есть желание пересмотреть</a>
-        </div>
-      </li>
-    
-      <li><a onclick="fnShowChapter(4)">IV. Зарисовки</a>
-      <div>
-       <a onclick="fnShowChapter(4, 'ch-4.1')">Сборная солянка</a>
-       </div>
-      </li>
-      
-      <li><a onclick="fnShowChapter(5)">V. Новый Год!</a>
-      <div>
-       <a onclick="fnShowChapter(5, 'ch-5.1')">Праздник к нам приходит</a>
-       <a onclick="fnShowChapter(5, 'ch-5.2')">*Новогодняя программа*</a>
-       <a onclick="fnShowChapter(5, 'ch-5.3')">КАНИКУЛЫ</a>
-       <a onclick="fnShowChapter(5, 'ch-5.4')">проверено - НЕ ПОДХОДИТ</a>
-       </div>
-      </li>
-    
-      <li style="float:right"><a href="#about">About</a></li>
-    </ul>
-    <h1>Мой первый пример</h1>
-    <p>Жили были....</p>
-    <p>не тужили</p>
-    <h2>Восьмикласница</h2>
-  <p2>Пустынной улицей вдвоём <br>
-  с тобой куда-то мы идём<br>
-И я курю, а ты конфеты ешь<br>
-И светят фонари давно, <br>
-ты говоришь: «пойдём в кино?»<br>
-А я тебя зову, м-м, в кабак, конечно<br>
-</p2>
+<style>
+	body,
+html {
+  padding: 8;
+  margin: 8;
+  height: 100%;
+  display: flex;
+  flex-direction: column
+}
+.navList {
+  background-color: #333;
+  border-bottom: 1px solid #333;
+  box-shadow: 0 2px 8px 0px rgba(0, 0, 0, 0.2);
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+  /*keep it high*/
+}
 
-  </body>
+.navList li {
+  float: left;
+  border-right:1px solid #bbb;
+}
+.navList li:last-child {
+	border-right: none;
+}
+.allContent {
+  flex: 1;
+  overflow: auto;
+  padding: 8px;
+}
+h1 {
+	color: DarkBlue;
+	font-family:'Curlz MT';
+	font-size: 48px;	
+}
+.navList a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  display: block;
+  transition: .3s;
+  white-space: nowrap;
+}
+
+.navList a:hover {
+  background-color: #777;
+}
+
+
+.navList a[href="#two"] {
+  color: #000;
+  background-color: #fff;
+}
+
+.navList > li {
+  position: relative;
+}
+
+.navList > li > div {
+  visibility: hidden;
+  position: absolute;
+  background-color: #333;
+  box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.2);
+  transition: .1s;
+  opacity: 0;
+}
+
+.navList > li:hover > div {
+  visibility: visible;
+  opacity: 1;
+}
+
+h3 {color: DarkBlue}
+	.collapsible {
+		background-color: #777;
+		color: white;
+		cursor: pointer;
+		padding: 18px;
+		width: 100%;
+		border: none;
+		text-align: left;
+		outline: none;
+		font-size: 15px;
+	}
+
+	.active, .collapsible:hover {
+		background-color: MidnightBlue;
+	}
+
+	.content {
+		padding: 0 50px;
+		display: none;
+		overflow: hidden;
+		background-color: Cornsilk;
+		color: black;
+		font-size: 18px;
+	}
+
+	</style>
+</head>
+
+<body style="background-color:powderblue;">
+
+<!-- CSS Navigation Bar -->
+<ul class="navList">
+  <li><a onclick="fnShowChapter(1)">I. ToDo</a>
+	<div>
+		<a onclick="fnShowChapter(1, 'ch-1.1')">a) stop torrents</a>
+		<a onclick="fnShowChapter(1, 'ch-1.2')">b) загрузи торенты</a>
+		<a onclick="fnShowChapter(1, 'ch-1.3')">c) удалить после раздачи 1:1 и больше</a>
+		<a onclick="fnShowChapter(1, 'ch-1.4')">d) отредактируй</a>
+	</div>
+  </li>
+
+  <li><a onclick="fnShowChapter(2)">II. Notes</a>
+    <div>
+      <a onclick="fnShowChapter(2, 'ch-2.1')">Наш ТВ UE48JS9000</a>
+    </div>
+  </li>
+
+  <li><a onclick="fnShowChapter(3)">III. Фильмы и Передачи</a>
+    <div>
+      <a onclick="fnShowChapter(3, 'ch-3.1')">Готово к просмотру</a>
+      <a onclick="fnShowChapter(3, 'ch-3.2')">В ПЛАНАХ (загрузить)</a>
+	  <a onclick="fnShowChapter(3, 'ch-3.3')">Посмотрели</a>
+	  <a onclick="fnShowChapter(3, 'ch-3.4')">Есть желание пересмотреть</a>
+    </div>
+  </li>
+
+  <li><a onclick="fnShowChapter(4)">IV. Зарисовки</a>
+	<div>
+	 <a onclick="fnShowChapter(4, 'ch-4.1')">Сборная солянка</a>
+   </div>
+  </li>
+  
+  <li><a onclick="fnShowChapter(5)">V. Новый Год!</a>
+	<div>
+	 <a onclick="fnShowChapter(5, 'ch-5.1')">Праздник к нам приходит</a>
+	 <a onclick="fnShowChapter(5, 'ch-5.2')">*Новогодняя программа*</a>
+	 <a onclick="fnShowChapter(5, 'ch-5.3')">КАНИКУЛЫ</a>
+	 <a onclick="fnShowChapter(5, 'ch-5.4')">проверено - НЕ ПОДХОДИТ</a>
+   </div>
+  </li>
+
+  <li style="float:right"><a href="#about">About</a></li>
+</ul>
+
+<h1>Cinema</h1>
+
+<div class="allContent">
+	<!-- <button class="collapsible">BtnHead</button>
+	<div class="content">
+  	<p>text</p>
+	</div> -->
+
+	<h3>I. ToDo</h3>
+	<button class="collapsible">a) stop torrents</button>
+		<div id="ch-1.1" class="content">
+		  <p>
+			- 6:1 Кто стучится в дверь (ТВ)<br>
+			- 6:1 John.Rabe.2009.L1.BDRip.1080p.[uniongang.tv].mkv <br>
+			- Steinberg The Grand 2 - остановил, как насчет опробовать?<br>
+			- Full Metal Jacket<br>
+			- <br>
+			- Cartagena.2009.1080p.BD-Remux.Rus.Fra.HDCLUB - after 2:1<br>
+			Black List of Screen writers, producers and etc.<br>
+			- I Origine<br>
+			
+		  </p>
+        </div>
+        
+	<button class="collapsible">b) загрузи торенты</button>
+		<div id="ch-1.2" class="content">
+		  <p>	- Neujahrskonzert 2016 (?  LPCM Audio / 2.0 / 48 kHz / 2304 kbps / 24-bit) - done<br>
+			- у это пользователя посмотри что есть https://rutracker.org/forum/tracker.php?rid=16250665<br>
+			- Classroom Art Minions - (there is alternative works on youtube)<br>
+			2-я страница https://rutracker.org/forum/tracker.php?search_id=XLF9kGcDRS3B&start=50&pid=3459801<br> (Svetach https://rutracker.org/forum/tracker.php?pid=3459801)<br>
+<br>
+		  </p>
+		</div>
+
+	<button class="collapsible">c) Удалить после раздачи 1:1 и больше</button>
+	<div id="ch-1.3" class="content">
+		<p>
+			Anna.Karenina.2012.1080p.BluRay.DTS x264-Talian-.mkv <br>
+			-- <br>
+			Operation.Finale.2018.BDRemux.1080p.DUB.EniaHD.mkv<br>
+			Любовь и голуби (60 фпс - временами странности со звуком)<br>
+			Polety_1982_DVD9 - есть в mkv в 1982 году 3:1<br>
+			BlacKkKlansman.2018.BluRay.1080p.DD5.1.x264.mkv - обманули с бомбой - на колекцию не пойдет<br>
+			Hostiles - Недруги<br>
+			Veselye rebjta_1934-DVDRip-AVC.mkv<br>
+			Finale Destination<br>
+			Waco (Real Life, mini serial)<br>
+			Ольга Сергеевна (1975)<br>
+			Silence Of The Lambs.1991.BD.Rip.1080p.h264.6xRus.Eng<br>
+			Final.Destination.2000.1080p.BluRay.5xRus.Ukr.Eng.HDCLUB-SbR.mkv<br>
+			 <br>
+			 <br>
+			 <br>
+		</p>
+	</div>
+
+	<button class="collapsible">d) отредактируй</button>
+		<div id="ch-1.4" class="content">
+			<h5>сделай замену</h5>
+			<p>
+			- Jerry Maguire в 4К в Real Life (уже удалил) <br>
+			- Старик Хотабыч на 7Гб лучшего качества чем "этот 4Кна 40Гб - постоянно мелкая рябь)<br> 
+			есть на 13Гб рип https://rutracker.org/forum/viewtopic.php?t=1157644 - фильм достойный<br>
+			- Wind River (real life\us\Taylor Sheridan) замени Блюрей с iTunes на рип, оставь аудио от iTunes
+			</p>
+			<h5>удали лишние аудио с "архивных" фильмов после раздачи</h5>
+			<p>
+				- Дьявол носит прадо - ? удалить ли удаленные сцены? есть лишняя озвучка - чешский
+			</p>
+			<h5>films that must be, but there isn't in good resolution</h5>
+			<p>
+				- Какая у вас улыбка (1974)<br>
+			</p>
+		</div>
+
+<h3>II Notes </h3>
+	<button class="collapsible">Наш ТВ UE48JS9000</button>
+	<div id="ch-2.1"  class="content">
+			  <p>модель нашего ТВ: UE48JS9000TXRU (BN94-08353S) <br>
+			  на внутренней стороне блока: <br>
+				-     >PC+ABS-FR(40)<br>
+				-     LED-JS9000<br>
+				-     ONE-CONNECT<br>
+				-     COVER-TOP<br>
+				-     BN63-13593X002<br>
+				-     A41W (1X1X2) -2<br>
+				-     бумажная наклека: с датой 2015.03.04<br>
+				<br>
+				3D; диагональ: 48"; разрешение: 3840 x 2160; HDTV Ultra HD 4K (2160p); SMART TV; DVB-T2; DVB-С; DVB-S2; тип USB: мультимедийный; разъем Ethernet 1; VESA 400×400; акустика 2 x 10 Вт <br>
+				((T-HKPAKUC.zip)) OCT 19,2017<br>
+				<br>
+				модель наших колонок: Boston Acoustics CS 260 II = 26 000р. 2019-09-08<br>
+				Harman Kardon HK3490<br>
+				 - цифровая обработка:<br>
+				<br>
+				Z97-PRO <br>
+				 * audio feature:<br>
+				 -- Absolute Pitch 192kHz/ 24-bit True BD Lossless Sound<br>
+					ref.: Compact Disc Digital Audio is 44.1 kHz/16-bit <br>
+
+				<br>
+				
+				1.0 документация в эл.виде: E:\Niko\Heart\shopping\наш ТВ <br>
+				1.1 проверяй соответствие фильмов формату 4К на http://realorfake4k.com<br>
+				1.2.1 на рутрекере этот юзер "pk5360114" сделал апскейл 2-а раза Антропоит на 15 и 11 гб под видом BDrip<br>
+				1.2.2 зернистый\кроп фильм на 30Гб (похоже что блюрей такой же) "The Judge" с Дауни Младшим ...=5145322  от ivanes20031987 https://rutracker.org/forum/profile.php?mode=viewprofile&u=23770535<br>
+					- блюрей от Gahan Dave ...=5020022 тоже такой<br>
+				</p>
+				<p>компьютерные мониторы Samsung LS23A700 DCL/Ci спецификация здесь https://www.cnet.com/products/samsung-s23a700d/
+				
+				</p>
+	</div>
+
+
+<h3>III. фильмы и передачи </h3>
+	<button class="collapsible">Готово к просмотру</button>
+	<div id="ch-3.1" class="content">
+		  <p>
+		  21.60 Ищу друга жизни 1987 (еще не закачан)<br>
+		  21.59 The.Insider.1999 (Russell Crowe, Al Pacino)<br>
+		  
+		  21.58 The Command (2018) - "Курск"<br>
+		  <br>
+		  21.57 Little Miss Sunshine - к ввыходным \ ЕЩЕ НЕ ЗАГРУЗИЛ<br>
+		  21.56 Старшая сестра.1966.mkv - Евстигнеев, Ватсон (Виталий Соломин), молодая Чурикова<br>
+		  <br>
+		  21.54  Мы веселы, счастливы, талантливы! - 1986, Владимир Николаевич поцак поцака не обманывает<br>
+
+		  21.51.00 Real Life <br>
+		  21.50.01 Fargo (1996, на реальных событиях, имевших место в Миннесоте в 1987 году)<br>
+		  <br>
+		  21.49.00 Экранизация популярных литературных призведений<br>
+		  -- 21.49.01 The Count of Monte Cristo, 1998 (Франция, Джерар Депардье)<br>
+		  -- 21.49.02 Anna Karenina, 2012 (!Великобритания) <br>
+		  -- 21.49.03 Война и мир, СССР, 1969<br>
+		  -- 21.49.04  The Count of Monte Cristo (US, 2002)<br>
+		    <br>
+			21.38.00 - 2018<br>
+
+			- 21.38.05 "Isle of Dogs" <br>
+			<br>
+		  
+		  <u>21.48.00 Оперы / опереты / водевили </u><br>
+		  -- 21.48.01 П.И.Чайковский - Евгений Онегин - 1958 (закачен, год 1958)<br>
+		  -- 21.48.02 Man bo dukhtare vokhurdam - 1957 (студия: Таджикфильм; "Я встретил девушку") <br>
+		  -- 21.48.03 <br>
+		  -- 21.48.04 <br>
+		  <br>
+		  21.49 - Семь стихий - 1987, фильм слабоват но возможно интересное музыкальное оформление <br>
+		  21.51 "Тридцать три" - 1965, Данелия (Джентельмены удачи, Афоня, Мимино, Кин-Дза-Дза), Леонов. <br>
+		  21.52 Дайте жалобную книгу - 1964, Эльдар Рязанов и другие ВЕЛИКИЕ АРТИСТЫ!<br>
+		  <br>
+		  --- "\на речке на речке\ "Мыла Марусенька белые ножки"<br>
+
+		  <u>21.47.00 Ради интерьера - "Интерьер и атмосфера - наше ВСЕ!" </u> <br>
+			-- 21.47.01 Goodbye Charlie - 1964, US, <br>
+			-- 21.47.02 Инспектор Гулл - 1979, СССР ??? качать или youtube (и там и там качество НИЖЕ)<br>
+			-- 21.47.03<br>
+			<br>
+
+			2.12 Lie.to.me<br>
+			<br>
+			<u>21.46.00 Ностальджи </u> <br>
+			-	21.46.01 <b>"Верные друзья"</b> - 1954, путешествие на плоту: Кошачий барин, Чиж, Индюк (Архитектор - номенклатура, Нейро-хирург и коневод-ветеренар) <a href="https://www.youtube.com/watch?v=qGXoycbxSnA&t=1619s">youtube Мосфильм 1080</a> <br>
+			-	21.46.02 <b>"Взрослые дети"</b> - 1961 - Алексей Грибов (нач.бюрократ из "Верные друзья") и Шурик (ЗАКАЧЕН) на youtube 480p.<br>
+			-	21.46.03 <b>"Дети Дон-Кихота"</b> - 1965 - закачен <br>
+			-	21.46.04 <b>"Родня"</b> - 1981, Дом.управ бриллиантовой руки Нонна Мордюкова \ судья по бракоразводным   <a href="https://www.youtube.com/watch?v=du-1H8aLtj8&t=1908s">youtube Мосфильм 1080</a>  <br>
+			-	21.46.05 Трое в лодеке не считая собаки - ремукс, 1979<br>
+			-	21.46.06 <br>
+			<br>
+
+			<u>21.44.00 Sport Sport Sport </u> <br>
+			21.44.02 ...<br>
+			<br>
+			
+
+			21.41 Zindagi Na Milegi Dobara - и как меня занесло на Индийское кино?? ZHIVEM.ODIN.RAZ.2011.BDRip.x264.1080р.BwTorrents.mkv<br>
+			21.42 Miller's Crossing - возможно стоящее кино или... полная противоположность (пудрим мозги)<br>
+			<br>
+			
+			<u>21.39.00 "Советская школа"</u><br>
+			-   21.39.01 Шут - 1988<br>
+			-   21.39.02 Плюмбум или опасная игра - 1986<br>
+			-   21.39.03 Чужие письма - 1975, Янковский<br>
+			-   21.39.04 Мужчины есть мужчины - 1985, youtube<br>
+			-   21.39.05 Единица с обманом - 1984<br>
+			-   21.39.06 Магия черная и белая - 1983, youtube<br>
+			-   21.39.07 Куколка - 1988<br>
+			-	21.39.09 Чучело - Ролан Быков и... и... <br>
+			-	21.39.10 Уроки французского - 1978<br>
+			-	21.39.11 Разные люди - сериал ссср 1973, Ирина Муравьева (Позвони мне позвони и москава слезам не верит) <br>
+			-   21.39.12 Пока не выпал снег - 1984 (poka.ne.vypal.sneg.avi \\ ПОКА НЕ ВЫПАЛ СНЕГ 16Х9 (Kultura 40).mkv<br>
+			-   21.39.13 Мимо окон идут поезда - СССР, 1965<br>
+			-   21.39.14 <br>
+			
+			21.36 О любви - 1970 (Янковский и Гафт) + фото <br>		
+			21.33 "Песни моря" (1971) - муз.ф. Румыния\СССР; Наталья Фатеева - недосмотрели<br>
+			<br>
+			2.8 ?? Нежданно - негаданно<br>
+		<br>
+			2.16 танс-батл - Singapore Dance Delight (смотрели до этого Super 24 2017)<br>
+
+			2.25.2 Running on Empty - 1988 - 31 Gb (нет меньшего) https://rutracker.org/forum/viewtopic.php?t=5425168<br>
+		<br>
+			2.43 "Не горюй" - Георгий Данелия<br>
+			2.45 Steve Jobs - Interview<br>
+		<br>
+
+			<u>2.49 Сказки советских времен</u><br>
+				2.49.3 оперета "Мама" - снималась на двух языках \ Боярский и Гурченко<br>
+		<br>
+			2.64 Fracture 2007 - в детективах<br>
+			2.65 Ай лав ю, Лёлик (вечер табакова) - ?<br>
+			2.66 Аритмия - ?<br>
+		<br>
+			2.71 На последнем дыхании / Breathless / A bout de souffle - франция, черно белое, 1960<br>
+		<br>
+		<br>
+			2.79 Будучи там 1979 (в приключениях)<br>
+			21.14 Get Out (2017) - (в приключениях)<br>
+			2.81 Freedom Writers - биография, 1-я дорожка двух голоска нтв; 2-я - многоголоска<br>
+		<br>
+			2.82 Down by Law 1982 - арт-хауз реж.Джармуш - в детективах<br>
+		<br>
+		<br>
+			2.90 Большой фитиль - 1963 -<br>
+			2.94 Clockwise - английский юмор (комедии)<br>
+			21.06 The Object of Beauty (Прелестная вещь) - ЭндиМакДауэл (актриса из День Сурка) Джон Малкович (комедии)<br>
+		<br>
+			21.10 The.Reluctant.Fundamentalist.2012 - арт-хауз \ спорное кино - НЕ ЗАКАЧЕН<br>
+			21.11 Будь что будет / Whatever Works	- арт-хауз \ спорное кино (Woody Allen - он же Вики, Кристина, Барселона)<br>
+			21.12 Anything Else - 2003, Woody Allen	- арт-хауз \ спорное кино (Woody Allen - он же Вики, Кристина, Барселона)<br>
+		<br>
+			21.15 Верю не Верю (Баширов и Петров)<br>
+				21.15.01 Das Experiment - посмотрели, осталась американская версия<br>
+				21.15.01 The Stanford Prison Experiment<br>
+		<br>
+			21.16 Cerro_Torre_Schrei_aus_Stein_1991_MVO (возможно арт-хауз, про альпинистов)<br>
+		<br>
+			21.18 Kill the Messenger -  biografi of Garry Webb<br>
+		<br>
+			21.20 Kill The Irishman - about Danny Greene  - в папке "История"<br>
+			21.21 Романс о влюбленных (1974) - музыка и песни Градского<br>
+		<br>
+			21.23.04 Marie Antoinette - XVIII век (диск2 D \ history )<br>
+		<br>
+		<br>
+			21.26 Театральные встречи 9 мая 1983 (youtube)<br>
+		<br>
+			21.27.00 My views on the subjects.<br>
+		<br>
+			21.28.00 Культовое из США<br>
+				21.28.01 Выпускник 1967 - еще не закач.<br>
+				21.28.02 Охотник на оленей 1978<br>
+				21.28.03 Злые улицы 1973 ???<br>
+				21.28.04 Easy Rider - Беспечный ездок 1969 - в temp DVD<br>
+				21.28.05 Ребенок Розмари - Rosemary's Baby 1968 - ужастик<br>
+				21.28.06<br>
+		<br>
+			21.29 Хождение по мукам 1974 ссср 13 серий<br>
+
+		  </p>
+	</div> 
+		        
+	<button class="collapsible">В ПЛАНАХ (загрузить)</button>
+	<div id="ch-3.2" class="content">
+		  <p>3.2
+	
+	<br>
+	- StartUp - serial 3 seasons<br>
+	- The Post 2017  G:\Real Life\00 - US  http://nnm-club.me/forum/viewtopic.php?t=1231984<br>
+	- Fargo https://rutracker.org/forum/viewtopic.php?t=4961631<br>
+	- Секретное досье / The Post 2017<br>
+	- The Monuments Men 2014<br>
+	- Ральф 2<br>
+	- Падингтон 2<br>
+<br>
+	- Левиафан в супер качестве<br>
+<br>
+	- Разорванный круг" / 1987 (там играет Галина Польских, детектив)<br>
+	- Хозяйка медной горы - посмотрели<br>
+	- Сказка рассказанная ночью (+ Холодное сердце)<br>
+	- 2-ой сез. Once Upon a Time ?<br>
+	- 2-ой сезон про новостной канал<br>
+	- 2-ой желтый в тренде или как то так<br>
+	- 2-ой меллиардеры<br>
+	- 4-ый Карточный домик<br>
+	- 2 - American Crime Story<br>
+	- 1 The Blacklist serial 2013??<br>
+	- American Hustle - смотрели - но... еще раз в 4К - пока нет на рутрекере - передумал взял в 720 :)<br>
+	- 2 The Crown serial королевская семья британии<br>
+	 - финский фильм "Безымянный солдат" 2017 года<br>
+	- Murder Rooms: The Mysteries of the real Sherlock Holmes - 2000 5 серий<br>
+	- 2 Life? (полицейский миллионер как компенсация за тюремный срок)<br>
+	- 2-ой Версаль - done<br>
+	- Приказано забыть - о 1940-х департация чеченцев<br>
+	- В субботу - почему низкий рейтинг (о трагедии на чернобыле)<br>
+	- Ближний круг 1991 - американский взгляд на сталина<br>
+	- Маленькая мисс Счастье - возможно про девочку которая взяла счастье семьи в "свои руки"<br>
+	- Рыжий пес - биография про австралийскую собаку<br>
+	- Мой парень — псих - ???<br>
+	- Охотники на гангстеров (Шон Пенн + красивая жизнь)<br>
+	<br>
+	<h5>Под вопросом</h5>
+	- Раз на раз не приходится - ком. с Джихаграняном и нашим дедом<br>
+	- Инспектор Гулл - фильм вроде так себе но есть интересный интерьер	<br>
+	- Игра без козырей <br>
+	- Американская трагедия 1981<br>
+	- Кража - 1982, по Джеку Лондону<br>
+	- Исчезновение - 1977, соц.реализм<br>
+	- Смерть под парусом<br>
+	- Инспектор Лосев - тв. сериал
+	<h5>Тихо! Идет съемка.</h5>
+	- Frozen 2 (2019 nov.)
+		  </p>
+	</div>	
+
+	<button class="collapsible">Посмотрели</button>
+	<div id="ch-3.3" class="content">
+		<p>
+			<u>21.48.00 Мультфильмы с историей </u><br>
+		    -- 21.48.01 Кот в колпаке + Добро пожаловать - Dr.Suess, US - композитор НИМЕНСКИЙ АНАТОЛИЙ НИКОЛАЕВИЧ<br>
+			-- 21.48.02 Контракт (1985, СССР, режисер: заставки к "С легким паром..." "Точка точка запятая", Ну погоди 17-18 выпуски <br>
+			-- 21.48.03 <br>
+			<br>
+			- 21.38.03 Prospect (Изыскания) 2018  - фантастика, только ради атмосферы<br>
+			- 21.38.04 Black Panther - 2018<br>
+			<br>
+			<br>
+			Остановился поезд.mkv<br>
+		21.55 Sadko - youtube "три богатыря" - полная чепуха<br>
+		<br>
+		----- 713 просит посадку - фильм 1960-х, советская ложь "...основано на реальных событиях но мы не расскроем имен" - удалил<br>
+		21.50 Три толстяка - 1966, Алексей Баталов (Москва слезам не верит)<br>
+						- Geniius - начало того века; про писателя в сша успех которого связан с издателем и болезнь писателя.<br>
+				...Хороший фильм но при желании пересмотреть возьми рип а блюрей-ремукс я удалю<br>
+	<br>
+			2.10 Школьные годы ссср<br>
+				2.10.1 А если это любовь Юлий Райзман 1961  - посмотрели<br>
+					- 1-я роль Миронова - эпизадическая<br>
+					- школьные года ссср<br>
+					- G:\USSR\Love<br>				
+				2.10.2 "Точка точка запятая" 1972 (H:\Cinema C\00 - USSR\00 - детство-юношество) - посмотрели<br>
+				2.10.3 "Это мы не проходили" 1975 - посмотрели<br>
+	<br>
+			2.11 Ла-ла-ленд - удалил, если что, возьмем в качестве попроще<br>
+	<br>
+			2.2.1 "Мой Младший брат" СССР<br>
+				- молодой Миронов (его второй фильм)<br>
+				- дебютировали: Олег Даль и Александр Збруев<br>
+				- сценарий Василий Аксенов (активный дессидент, в 1980 эммигрировал)<br>
+			2.2.2 Колеги 1962 https://www.youtube.com/watch?v=5BKj0-UPnIs - не показывали по ТВ из-за Василия Аксенова<br>
+			2.21 Звуки музыки (мюзикл - биография) Абатшу озвучивает актриса что и фан-фан тюльпан (биография но... много наврали - удалил<br>
+			2.22 The Infiltrator - autobiography of the same name by Robert Mazur, a U.S. Customs special agent (ase of Pablo Escobar) развязка на<br> свадьбе - biopic<br>
+	<br>
+	<br>
+			2.23 Captain.Fantastic.2016 	G:\Приключения - посмотрели - в коллекцию<br>
+			2.25 (из кинопоиска на тему "ХОД")<br>
+				2.25.1 Как Иванушка-дурачок за чудом ходил - сказка - done<br>
+				2.25.3 They Shoot Horses, Don't They - 1969 - done<br>
+	<br>
+			2.36 State.of.Play - британский мини-сериал - dell it<br>
+	<br>
+			2.3 мультфильмы на youtube<br>
+			2.30 La Piovra - СПРУТ (ретроспектива, озвучка ссср)- done<br>
+	<br>
+			2.33.0 American<br>
+				2.33.1 The.American.2010.BDRemux.1080p.AVC.Rus.Eng.mkv - медитативный с Клуни (посмотрели - удалил)<br>
+				2.33.2 American.Made.2017 - Real Life - People \ biographical of Barry Seal - посмотрели<br>
+				2.33.3 American Gangster 2007 - Real Life - People \ biographical of Frank Lucas<br>
+	<br>
+			21.34 Совершенно серьезно (1961) под руководством Ивана Пырьева разные реж. (есть Александр Белявский, он же Фокс)<br>
+				
+			2.37 Тутси (на G в Comedy) - посмотрели<br>
+			2.38 "Das.Leben.der.Anderen" 2006 "Жизнь других" компиляция реальной жизни восточной германии - посмотрели<br>
+			2.47 Veep - сериал, политика, возможно реал-лайф ((4 серии за раз)) - удалил (постоянно камера дергается - зачем??????)<br>
+			2.48 Narcos - сериал, биография Pablo Escobar ((2 серии за раз)) - удалил<br>
+			
+			2.49 Сказки советских времен<br>
+				2.49.1 Сказка рассказанная ночью - по сказкам немецкого писателя - посмотрели<br>
+				2.49.1.2 Холодное сердце - ГДР - смотрели<br>
+				2.49.2 Каменный цветок	? кто угадает год фильма - посмотрели<br>
+				
+			2.5 17 мгновений<br>
+			2.51 WHITE COLLAR - сериал ((по 3 серии за раз)) - посмотрели - мне не понравилось из-за надуманности ВСЕГО<br>
+			
+			2.53 Sci-Fi<br>
+				2.53.1 Ex Machina - 2014 - научная фантастика - посмотрели<br>
+				2.53.2 Светлячок / Firefly - сериал (смотреть по 2-3 серии) - посмотрели<br>
+				2.53.3 Serenity - продолжение сериала - еще не закачивал (ремукс 23гб и рип 12) - посмотрели<br>
+	<br>
+			2.57 King of the Hill - 1999 - о временах "великой депрессии" в сша \History\ - в коллекцию<br>
+			
+			2.6 Три плюс два с Фатеевой и Мироновым, ШИРОКОЭКРАНКА -<br>
+				2.6.1 ШИРОКОЭКРАНКА (длиннее на 13 мин. и снимали разные дубли на разные камеры, сначала на широкоэкранку)<br>
+				2.6.2 Фатеева (Розыгрыш, место встречи изменить нельзя + о путине) и Миронов<br>
+				2.6.3 сценарий отца Никиты Михалкова<br>
+	<br>
+	<br>
+			2.40 Dunkirk.2017 - Real Life + "добротный фильм" - смотрели - удалил<br>
+			2.26 Частный детектив, или Операция «Кооперация» - предпоследняя работа Гайдая (в одном месте плакал и смеялся) youtube - смотрели<br>
+	<br>
+			2.7 Паспорт<br>
+			2.18 Мой ласковый и нежный зверь (Blu-Ray)<br>
+	<br>
+			2.22 "To Kill a Mockingbird"<br>
+				- пульцеровская премия за роман<br>
+				- AFI's 100 Years... - 100 Heroes & Villains<br>
+					13.	Oskar Schindler<br>
+					18.	Robin Hood<br>
+					22.	Spartacus<br>
+					26.	Superman<br>
+			2.19 (( https://docs.google.com/document/d/1OZShxmJhhGjf4Vy9IPIXqqeGqyJSr6iXJiLIRVUOjw0/edit ))<br>
+				2.19.1 D:\Cinema D\00 - Music\002 Retrospective\Stevie Wonder<br>
+										US Billboard Hot 100<br>
+					- I Just Called to Say I Love You	1984	 1	25<br>
+					- Don't You Worry 'bout a Thing		1974	16	88<br>
+					- Superstition 				72-73	 1	26<br>
+				2.19.2 Sing 2016<br>
+			2.15 Уличный кот по имени Боб<br>
+			2.14 сериал Тюадоры - тотальная ложь - дрянь - одним словом<br>
+			2.24 "Ход конем" (1962\ ссср \ Краморов \ дир. Дударова Вероника 100 исп. \ реж. Лукашевич Татьяна предпоследний фильм)<br>
+			2.27 Farewell, My Lovely (1975, детектив)<br>
+			2.28 Завтрак у Тиффани (1961, сюжет с котом в такси) - оставить в коллекцию<br>
+			2.29 Школьный вальс (1978 - ретроспектива о советской жизни)<br>
+				2.9 Не было бы счастья<br>
+	<br>
+			2.31 Wimbledon 2004<br>
+			2.32 Stranger Than Fiction "Персонаж" - 2006 (G\Fantasy)<br>
+				комм.Генадия Павленко: "А зачем ты живешь"<br>
+	<br>
+			2.34 "Great Expectations"\"Большие надежды" 1998 экранизация Чарльза Дикенса - посмотрели - удали после раздачи<br>
+	<br>
+			2.41 "Death Proof" 2007 фильм Тарантина - потрепать нервы\психологический ужастик\"гонки"<br>
+	<br>
+	<br>
+			2.39 Pirates.of.the.Caribbean.Dead.Men.Tell.No.Tales.2017<br>
+			2.13 Последняя реликвия - Талинфильм<br>
+	<br>
+			2.35 последняя серия научного про космос - done<br>
+			2.42 "Берегите мужчин" 1982 ссср - атмосфера Брежневских лет (Cinema D) - посмотрели / оставь в архиве<br>
+			2.44 compare IMAX rip vs 4K 10bit -  Guardians Of TheGalaxy vol. 2 - done<br>
+			2.46 Baby Driver - приключения -  done<br>
+	<br>
+	<br>
+			2.47 Трилогия от сценариста Taylor Sheridan<br>
+				2.47.1 "Sicario" 2015		- done<br>
+				2.47.2 "Hell of High Water" 2016 - смотрели<br>
+				2.47.3 "Wind River" 2017	- done (iTunes) - перекачал с официальной озвучкой<br>
+			2.48 The Thomas Crown Affair - посмотрели<br>
+	<br>
+			2.56 Венсан Кассель<br>
+				2.56.1 "Номер 44" - Венсан Кассель, на основе истории в СССР (2015 снят с проката в РФ) \History\ - посмотрели - удали<br>
+				2.56.2 Robots - мультфильм 2005 - Венсан Кассель озв. Родни<br>
+				2.56.3 Eastern Promises (Порок на экспорт) - 2007 !!Арт-хаус -треллер про криминал из РФ \в приключения\ - посмотрели - удали<br>
+				2.56.4<br>
+				2.56.5<br>
+	<br>
+			2.50 How to Make It in America - сериал, возможно реальная-жизнь "Кубик в Кубе" ((4 серии за раз))<br>
+					<br>
+			2.50 Blade.Runner.2049 - удалить к чертям<br>
+	<br>
+			2.51 Wish.Upon.A.Star.1996.DVD5 - приключение-комедия в стиле "поменяться местами" - посмотрели<br>
+			2.52 The.Founder.2016 - биография Ray Kroc - посмотрели<br>
+			2.53 Мой Нежно Любимый Детектив - Гафт 1986 - посмотрели<br>
+			2.54 Про кота... - Гафт 1985 - посмотрели<br>
+			2.55 Великий диктатор - Чарли Чаплин - посмотрели<br>
+			
+			2.59 Энди МакДауэл<br>
+				2.59.1 Green Card - 1990, Энди МакДауэл и Жерар Депардье, комедия <br>
+				2.59.2 Предмет красоты - не загружается<br>
+			
+			2.60 Once Upon a Time<br>
+				2.60.1 Сезон 1 - посмотрели<br>
+	<br>
+			2.62 Все мы родом из детства<br>
+				2.62.1 "Добро пожаловать или Посторонним вход воспрещен" - 1964 папка: детство-ющошество<br>
+				2.62.2 "Просто ужас" - 1982 папка: детство-ющошество<br>
+			2.61 Wreck-it Ralph - Ральф - мультфильм - посмотрели<br>
+	<br>
+			2.63 3_BILLBOARDS_OE_MISSOURI_BDRip_1080p_DON.mkv - возможно реал лайф а так... черт его знает что за фильм - посмотрели<br>
+	<br>
+			2.68 Петр Лещенко Все что было - сериал 2013 (в РФ не показывали до лета 2017) - плохая режисерская работа<br>
+			2.69  Tucker: The Man and His Dream (в темп - dvd) - biografical<br>
+			2.70 4 месяца, 3 недели и 2 дня - румынский (real life) - посмотрели<br>
+			2.72 No Country for Old Men - 2007  в детективах - посмотрели - боевичек в стиле реальная жизнь<br>
+			2.73 Collateral - детектив, киллер Том Круз - посмотрели, удалил так как фильм не реставрирован<br>
+			2.74 Иностранец (Джеки Чан) 2017 - done<br>
+			2.75 I,Tonya - real, sport, 2017 - done - real life<br>
+			2.77 Payback: Straight Up - The Director's Cut 1999-2006 (реж.вер. ближе к реальности без супер полож.гер.) - done<br>
+			2.76 Мы, нижеподписавшиеся - 1981 - посмотрели, в коллекцию СССР<br>
+	<br>
+			2.78 Body of Lies (много раздающих можно 1:1) - 2008, выдумка, чистой воды приключение,<br>
+				действие в Омане снимали в Мороко так как в Дубае отказали посмотрев сценарий<br>
+				(Леонардо ДиКаприо, Рассел Кроу) - удалил за ложь<br>
+				... поставь рейтинг на кинопоиске<br>
+			2.79 Доживем до понедельника.1968 - Штирлец на пенсии - посмотрели - можно в коллекцию<br>
+			---- Peaceful Warrior - много лобуды, очень много, в рассчете на тинейджеров запудрить мозги образами - удалил<br>
+	<br>
+	<br>
+			2.87 Kapitanskaja_do4ka_[torrents.ru] (в вм==dvd temp)<br>
+			2.87 Airport (1970, US, по роману Артур Хейли) - в G:\temp - DVD names and etc<br>
+			2,88 Аэропорт со служебного входа (1987, USSR) - C:\temp 3<br>
+	<br>
+			2.89 Подарок судьбы (ссср) - C:\temp 3<br>
+			2.89 Кто поедет в трускавец - 1977 USSR - youtube - (сталкер ухаживает за Миледи с лилией на плече)<br>
+			2.93 Не было печали - 1982 USSR - youtube - посмотрели (Афоня в роли врача-ученого и появление дочки/внучки)<br>
+	<br>
+			2.91 Приходите завтра - 1963 - youtube - цветная версия - на трекере есть тврип с обрезанным низом и рассинхроном звука<br>
+			2.92 Thelma & Louise - 1991 - реж. Ридли Скотт; сц.Callie Khouri  - в приключениях - done<br>
+			----	A.Street.Cat.Named.Bob.2016.1080p.BluRay.Rud.Eng.HDCLUB-SbR .mkv<br>
+	<br>
+			2.96 Биндюжник и король - СССР, 1989, Мюзикл (в dvd temp)<br>
+			... по мотивам произведений Исаака Бабеля "Закат" и "Одесские рассказы"<br>
+	<br>
+			2.95 Hop (2011 - с анимированным кроликом)<br>
+			2.80 Silver Linings Playbook - комедия про взаимоотношения - мой парень псих - done<br>
+			2.98 Безумный Макс 2017 - развлечение экшн - удалил<br>
+	<br>
+			2.99 The Crown s02 (GOOD PEOPLE подбор больше понравился как в сюжете с сестрами так и голос премьер министра) сравнивал с Jaskier и NewStudio<br>
+			3.00 The.Monuments.Men.2014 - история второй мировой - сохранение культурных реликвий
+	<br>
+			2.93 The Good Lie - 2014 \ real life - done (беженцы из Судана)<br>
+	<br>
+			2.83 Бумер 1 в диск E детективы или на youtube и Бумер 2 HD (еще не закачал) - done<br>
+	<br>
+			2.84 The Greatest Showman (биография, в риэл лайв \ US - done<br>
+			2.85 Человек-невидимка (1984, ссср) на youtube на канале мосфильма - посмотрели<br>
+			2.86 Le corniaud - Разиня (1965, Франция, Лую де Фюнес \\ C:\temp - название файла) - посмотрели - удали после 1:1<br>
+	<br>
+			2.88 La grande bellezza.2013 - итальянский про писателя книги - done - удалил (когда нечего написать писатель пишет про себя<br>
+			2.87 Airport (1970, US, по роману Артур Хейли) - в G:\temp - DVD names and etc<br>
+	<br>
+			2.97 Se7en.1995 - детектив - done - удалил сразу без раздачи<br>
+			3.03 Never Back Down (Remux) (в приключениях, молодежный но... возможно достоин за счет чего-то другого) - done - молодежный<br>
+			3.07 Hostiles - Недруги (2017, ближе к вестерну) - done<br>
+			3.08 Marshall (2017, real life судебная система сша) - посмотрели, в коллекцию<br>
+			3.09 Secretariat (2010, биография) претендент на коллекцию - посмотрели - про жизньи и реальность но не тянет на коллекцию<br>
+	<br>
+	<br>
+			21.04 Такси-блюз.1990 - посмотрели<br>
+			21.05 True Grit - в коллекцию<br>
+			21.13 Гонка века (1986) и The Mercy (2018) - Donald Charles Alfred Crowhurst (1932 – July 1969) Sunday Times Golden Globe Race<br>
+			21.17 Смотри в оба (1981, ссср, наш дед) - посмотрели, в коллекцию<br>
+			21.19 McMafia - TV ser 2018 - удалил - халтура и возможно заказуха<br>
+	<br>
+			21.24 Full Metal Jacket - Стенли Кубрик о вьетнамской войне - done<br>
+	<br>
+			21.27.01 tmp "Binnders": - dıd<br>
+				Microsoft →  Jap → bad Adv → Proff → 2 bads adv → Layflat Binder → Culture(memo+2_songs) →<br>
+				realSong_butts → cult(girls, chipmunks etc) → our times → Friends<br>
+			21.27.02 perfect binding (Desctop Publisher) - dıd<br>
+			21.27.03 Vancouver (People Are Awesome) - dıd<br>
+			21.25 Friends - https://rutracker.org/forum/viewtopic.php?t=5273137<br>
+	<br>
+					
+			21.23.00 История как она есть<br>
+				21.23.01 Генрих VIII - XVI век (в dvd)<br>
+				21.23.02 The Other Boleyn Girl - XVI век (еще не закачивал) - не стал закачивать - плохие отзывы тех, кто любит историю и точность<br>
+				21.23.03 Барри Линдон (1975) - XVIII век (в приключениях)<br>
+					- на nnm в категории "интеллектуальное кино" а rutracker - арт-хауз<br>
+					- реж.  Stanley Kubrick (2001 год: Космическая одиссея (1968) \ Full Metal Jacket)<br>		
+		
+			21.30 Veselye rebjta_1934-DVDRip-AVC.mkv - комедия, муз. Дунаевского, может к новому году?<br>
+			21.31 На крыше мира.2015.RUS.BDRip.720p.mkv - север и снега - G:\Anime - удалил - ложь, ложь, ложь - все там ложь<br>
+
+		21.32 "Все решают мгновения" 1978<br>
+				a) тв-рип - в СССР (Абдулов, первый тренер; Наталья Фатеева, второй тренер) - светлее чем второй вариант ((в папке двд темп))<br>
+				b) youtube https://www.youtube.com/watch?v=1jKBk57VEa4<br>
+		
+		21.35 "И это все о нем" 1977, ссср тв сериал 6 серий (Леонов, чародей)<br>	
+		21.35 Ольга Сергеевна (1975) (в папке tv=series; Татьяна Доронина, Армен Джигарханян, Лев Дуров, Валентин Гафт, Татьяна Карпова...)<br>
+		<br>
+		21.37.00 советские спортивные фильмы<br>
+			
+				21.37.01 Запасной игрок 1954<br>
+				<br>
+				
+			21.38.01 Oceans.Eight (2018, audio:BD licence - ЧЕПУХА<br>
+			21.38.02 Bad Times at the El Royale (2018, ITunes) - ЧЕПУХА<br>
+			21.38.03 Upgrade (2018, Sience Fiction) - ЧЕПУХА<br>
+		<br>
+		
+		
+		21.40 "Любовь и голуби" - 1984, Юрский в эпизодах, два года после метро Роше <br>
+		
+		<u>21.44.00 Sport Sport Sport </u> <br>
+			21.44.01 2016 WTA Finals (в папке детективов<br>
+			... Ana Ivanovic 2014(2007 4-я) 5-я ракетка мира ? 15$)<br>
+			... Dominika Cibulkova 2014 11-я ракетка (2016 5-я) 15$ - завершила карьеру<br>
+			... Svetlana Kuznetsova <br>
+			<br>
+			
+		21.45 Finale Destination - ужастики-фентези<br>
+		21.38.00 - 2018<br>
+			21.38.01 BlacKkKlansman - 1970-е, первый темнокожий полицейский в том округе<br>
+			21.38.02 Operation.Finale <br>
+			
+		21.43 Waco (Real Life, mini serial) <br>
+		21.53 Flight.2012 - туфта - удалил<br>
+		21.52 Shot.Caller.2017 - туфта! - удалил<br>
+		  <br>
+		</p>		
+	</div>
+
+	<button class="collapsible">Есть желание пересмотреть</button>
+	<div id="ch-3.4" class="content">
+	  <p>
+		<h5>НА БОЛЬШОМ ЭКРАНЕ и колонки</h5>
+		- Левиафан<br>
+		- "Поворот" - ради игры актера, атмосфера<br>
+		- The Devil Wears Prada <br>
+			<p style="margin-left: 40px">
+			- ?? cutted-scene<br>
+			- information from wikipedia<br>
+			- <a href="https://en.wikipedia.org/wiki/Anna_Wintour#The_Devil_Wears_Prada">Anna Wintour (Vogue)</a><br>
+			- The september issue (2009 - doc )<br>
+			- smth on youtube: <a href="https://www.youtube.com/watch?v=MhXwO_mkdzQ"> 73 Questions with Anna Wintou</a><br>
+			- 12th most profit film<br>
+			- <br>
+			- <br>
+			- <br>
+			</p>
+		- Бойцовский клуб (we did - format 'Open Matte')<br>
+		- Knockin' On Heaven's Door (в приключениях, озвучка 2-я Мосфильм) - did<br>
+		<br>
+		<h5>ПОЛИТИЧЕСКИЕ КЛИПЫ</h5>
+		- Бульдозер Марвина Химейера<br>
+		- Kanye West "No Church in The Wild"<br>
+		- украинский Sergiy Faifura "Bandera"<br>
+		- Obama That I Used To Know - Gotye Parody<br>
+		- DEBT BOMB by Dominic Frisby<br>
+		<br>
+		- сюда-же вне конкурса <br>
+			- "Rag n Bone Man - Human"<br>
+		<br>
+		<h5>ШИКАРНЫЕ КЛИПЫ</h5>
+		- Дайнеко "Девушка на миллион"<br>
+		- ? про сына "мой ангел"<br>
+		<br>
+		Ральф против интернета - в официальном переводе<br>
+		2.79 Доживем до понедельника.1968 (Школа, Штирлец на пенсии)<br>
+		
+		<h5>ЗАЖИГАЕТ</h5> 
+		- Straight Outta Compton \ Голос улиц (2015, реперы, биография) - Real Life<br>
+		<br> 
+		<h5>ВТОРАЯ РЕАЛЬНАЯ ЖИЗНЬ</h5>
+		- Knife in the Water 1962<br> 
+		
+		<h5>НАСТАЛЬГИЯ</h5> 
+		(чертежно-проектное бюро) с Янковским "Полеты во сне и на яву" + Я самая обаятельная и привлекательная<br> 
+		<br> 
+		<h5>ПРИКЛЮЧЕНИЯ</h5>
+		- Matchstick.Men - 2003, Nicolas Cage, Sam Rockwell, Alison Lohman, <br> 
+			<br>
+		<h5>высоко-художественная работа</h5> 
+		- Грачи 1982 - на пересмотр - как <br>
+
+		<br> 
+	  </p>
+	</div>
+
+<h3>IV. Зарисовки</h3>
+	<button class="collapsible">Сборная солянка</button>
+	<div id="ch-4.1"class="content">
+		<p>
+		4.1.1 Asia https://en.wikipedia.org/wiki/Asia<br>
+		4.1.2 D:\Cinema D\00 - Music\Asia\4minute<br>
+	<br>
+		4.2.1 (Узбекистан) певица Назархан Севара https://www.youtube.com/user/sevaramusic/videos<br>
+			audio http://rus.audiotank.ru/album-315679-sevara-nazarhan-sen<br>
+		4.2.1 uzbec tv https://www.youtube.com/channel/UCisKdSbTsPt16yGuN4iNgrA<br>
+		Music of Uzbekistan https://en.wikipedia.org/wiki/Music_of_Uzbekistan<br>
+		? Назархан Севара - Korgim Kelar<br>
+	<br>
+		4.3.1.  Стадион "Локомотив" (с 1925 главный стадион города)<br>
+			Куйбышев-Самара (1м.230т. 12 место из 23) 28 Июня 1984 11:00<br>
+			"Авось" (Московский Театр "Ленком" М.Захарова) \ сб.команда журналистов<br>
+		4.4.1 Thailand	  <br>
+		</p>
+	</div>
+
+<h3>V. Новый Год!</h3>
+	<button class="collapsible">Праздник к нам приходит... до дня нового года</button>
+	<div id="ch-5.1" class="content">
+		  <p>5.0.0<br>  
+		  
+		  - 	((https://rutracker.org/forum/viewtopic.php?t=1353935))<br>
+		- 10-е Королевство<br>
+		- Гостья из будущего<br>
+		- Veselye rebjta_1934-DVDRip-AVC.mkv (21.30) - комедия, муз. Дунаевского<br>
+		... может Веселых ребят на каникулы
+		- "Чародеи" <br>
+		- "Ищите женщину" (детектив)<br>
+		- "Чародеи" <br>		
+		- "Кудряшка Сью"<br>
+		- ? 	Капитан врунгель<br>
+		- 		- "Гусарская баллада"		- D:\Cinema D\00 - USSR\00 - 1950-69<br>
+		- "Джентельмены удачи" 		- Cinema D\USSR\ <br>
+		- "Приходи на меня посмотреть"<br>
+		- "Frozen" (Холодное сердце) 2013				- G\Anime
+		  </p>
+	</div>
+
+	<button class="collapsible">* * * *Новогодняя программа* * * *</button>
+	<div id="ch-5.2" class="content">
+		  <p>5.0.1<br>
+		  - Кабачок "13 стульев" 2-ой выпуск Новогодний = load to D:\Cinema D\00 - USSR\00 - спектакли<br>
+			- youtube Otis Redding merry christmas baby<br>
+			- youtube "treble choir of houston" - подбери https://www.youtube.com/channel/UCCIJZe9AL-1n1YmtgqwmCEA/videos <br>
+			- Карнавальная ночь (1950-69)<br>
+			- С легким паром - 2 серии разделим до и после<br>
+			<br>
+			- Новогодняя музыка<br>
+				- youtube https://www.youtube.com/watch?v=-VGQZwIlWiU <br>
+				- May it Be - Lisa Kelly https://www.youtube.com/watch?v=-wyVR1RqPwQ <br>
+			- Поздравление Брежнева<br>
+			- VA - It's Christmas Live From the Royal Albert Hall 2017<br>
+			- Vancouver CHRISTMAS (2017 - https://www.youtube.com/watch?v=LaI9HA3t80A)<br>
+			- europ web cam? или старые записи<br>
+		  </p>
+	</div>
+
+	<button class="collapsible">КАНИКУЛЫ</button>
+	<div id="ch-5.3" class="content">
+		  <p>
+		  - Borrowed.Hearts.1997 ← dvdrip_[1.46]_[teko].avi - Canada<br>
+		  - Штрафной удар (1963) (много красивых зимних моментов)<br>
+
+		  - Старый новый год		- есть (H:\Cinema C\00 - USSR)<br>
+		  <br>
+		  - здесь " 50ф. про новый год" http://www.blogbaster.org/post143860976/ <br>
+		  </p>
+	</div>
+
+	<button class="collapsible">проверено - НЕ ПОДХОДИТ</button>
+	<div id="ch-5.4" class="content">
+		<p>- "Сибирский цирюльник"</p>
+	</div>
+
+<p>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+</p>
+</div>
+
+<!-- 		***Notes***
+	fnShowChapter: 
+		a) scrollIntoView()
+		b) if user choose main chapter ("vrHead") 
+	subChapters ("vrSubCh") will not open\close ("block"\"none")
+-->
+<script>
+	function fnShowChapter(vrHead, vrSubCh) {
+		document.getElementsByTagName("h3")[vrHead-1].scrollIntoView();
+
+		if (vrSubCh.length > 0) {
+			var objByClassContent = document.getElementsByClassName("content");
+			var ii
+			for (ii = 0; ii < objByClassContent.length; ii++) {
+				if (objByClassContent[ii].style.display === "block") {
+					objByClassContent[ii].style.display = "none";
+
+					var objCollapsible = objByClassContent[ii].previousElementSibling ;
+					objCollapsible.classList.toggle("active");
+						}
+			};
+		var vrSubChptr = document.getElementById(vrSubCh)
+
+			if (vrSubChptr.style.display === "block") {
+				vrSubChptr.style.display = "none";				
+			} 
+			else {
+			vrSubChptr.style.display = "block";
+			}
+		var objCollapsible = vrSubChptr.previousElementSibling ;
+		objCollapsible.classList.toggle("active");
+		};		
+    }
+</script>
+
+<script>
+	var coll = document.getElementsByClassName("collapsible");
+	var i;
+	for (i = 0; i < coll.length; i++) {
+		coll[i].addEventListener("click", function() {
+			this.classList.toggle("active");
+			var content = this.nextElementSibling;
+			if (content.style.display === "block") {
+				content.style.display = "none";
+			} else {
+				content.style.display = "block";
+			}
+		});
+	}
+</script>
+ 
+</body>
 </html>
-
