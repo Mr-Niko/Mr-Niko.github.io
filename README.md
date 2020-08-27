@@ -7,7 +7,7 @@
 ### Table of Contents
 
 - [VS Code](#VS-Code)
-[- javascript code example](#java-ex)
+- [javascript code example](#java-ex)
 
 
 <a name="VS-Code"></a>**VS Code** provides two different scopes for settings:
@@ -19,7 +19,7 @@ Workspace settings override user settings. Workspace settings are specific to a 
 
 > **Note**: A VS Code "workspace" is usually just your project root folder. Workspace settings as well as [debugging](https://code.visualstudio.com/docs/editor/debugging) and [task](https://code.visualstudio.com/docs/editor/tasks) configurations are stored at the root in a `.vscode` folder. You can also have more than one root folder in a VS Code workspace through a feature called [Multi-root workspaces](https://code.visualstudio.com/docs/editor/multi-root-workspaces)
 
-<a name="java-ex"></a>
+<a name="java-ex"></a> javascript code example
 ```javascript
 function fancyAlert(arg) {
   if(arg) {
@@ -28,9 +28,10 @@ function fancyAlert(arg) {
 }
 ```
 
-> This is a block code
+> `This is a block code`
 >> and more
 >>> some more
+
 
 
 
