@@ -2,12 +2,17 @@
 *(the place for my personal HTML training)*
 
 ## markdown examples 
-*(my testing)*
+*(as said before in other words: it's my testing)*
 
 ### Table of Contents
 
 - [VS Code](#VS-Code)
 - [javascript code example](#java-ex)
+- [image and line break](#image-and-line)
+- []()
+- []()
+- []()
+
 
 
 <a name="VS-Code"></a>**VS Code** provides two different scopes for settings:
@@ -33,12 +38,16 @@ function fancyAlert(arg) {
 >>> some more
 
 
-
-
 ```javascript
 var s = "JavaScript syntax highlighting";
 alert(s);
 ```
-```script
-ls
-```
+<a name="image-and-line"></a>
+## the way to insert image and line break\ _this is not work in header_
+> `images_folder/img.jpg`  < works\
+ `/images_folder/img.jpg`  < this will work on webserver's only (please read the note!)
+ 
+## the way to insert image and line break <br /> _perfect `<br />`_ 
+> `images_folder/img.jpg`  < works <br />
+ `/images_folder/img.jpg`  < this will work on webserver's only (please read the note!)
+
