@@ -1,6 +1,10 @@
 # Mr-Niko.github.io
 *(the place for my personal HTML training)*
 
+## Usefull Extentions
+
+here [settup_to_work.md](settup_to_work.md)
+
 ## markdown examples 
 *(as said before in other words: it's my testing)*
 
@@ -51,3 +55,9 @@ alert(s);
 > `images_folder/img.jpg`  < works <br />
  `/images_folder/img.jpg`  < this will work on webserver's only (please read the note!)
 
+temp text:
+How to do that? 
+- open **VS Code**
+- `Ctrl+Shft+X` → in the search field `ritwickdey.liveserver`
+- click **install**
+- re-open **VS Code** after *extention be installed* 
