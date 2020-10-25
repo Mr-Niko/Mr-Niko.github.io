@@ -5,19 +5,22 @@
 
 here [settup_to_work.md](settup_to_work.md)
 
-## markdown examples 
-*(as said before in other words: it's my testing)*
+## needs to solve "How to configure portable versions of *VS Code + integrated terminal as portable mode + portableGit + SSH*
+
+[settup_GitPortable.md](settup_GitPortable.md)
+
+## markdown examples
+
+> as was said before: it's my testing place
 
 ### Table of Contents
 
 - [VS Code](#VS-Code)
 - [javascript code example](#java-ex)
 - [image and line break](#image-and-line)
+- [EoL Sequence](#EoL-Sequence)
 - []()
 - []()
-- []()
-
-
 
 <a name="VS-Code"></a>**VS Code** provides two different scopes for settings:
 
@@ -46,12 +49,16 @@ function fancyAlert(arg) {
 var s = "JavaScript syntax highlighting";
 alert(s);
 ```
+
 <a name="image-and-line"></a>
-## the way to insert image and line break\ _this is not work in header_
+
+### the way to insert image and line break\ _this is not work in header_
+
 > `images_folder/img.jpg`  < works\
  `/images_folder/img.jpg`  < this will work on webserver's only (please read the note!)
- 
-## the way to insert image and line break <br /> _perfect `<br />`_ 
+
+### the way to insert image and line break <br /> _perfect `<br />`_
+
 > `images_folder/img.jpg`  < works <br />
  `/images_folder/img.jpg`  < this will work on webserver's only (please read the note!)
 
@@ -61,3 +68,13 @@ How to do that?
 - `Ctrl+Shft+X` → in the search field `ritwickdey.liveserver`
 - click **install**
 - re-open **VS Code** after *extention be installed* 
+
+## <a name="java-ex">EoL-Sequence</a>
+
+src:
+- [on medium.com by Chandrashekar Munukutla](
+https://medium.com/@csmunuku/windows-and-linux-eol-sequence-configure-vs-code-and-git-37be98ef71df)
+- youtube <span style="color:red">.ru language</span> by Ilya Kantor
+  - [at a moment of git settup](https://youtu.be/N38Pol6Mgfk?list=PLDyvV36pndZHkDRik6kKF6gSb0N0W995h&t=199)
+  - [Проблема с переводами строк Windows/Linux](https://www.youtube.com/watch?v=3HLdTxLfg9g&list=PLDyvV36pndZHkDRik6kKF6gSb0N0W995h&index=9)
+  - [Настройка core.autocrlf для нормализации переводов строк](https://www.youtube.com/watch?v=wWldtQPMPQg&list=PLDyvV36pndZHkDRik6kKF6gSb0N0W995h&index=10)
